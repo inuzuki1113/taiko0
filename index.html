@@ -214,25 +214,19 @@ const songs = [
     ];
 
 
-function getRandomSong() {
-    if (songs.length === 0) return "曲名なし";
-    return songs[Math.floor(Math.random() * songs.length)];
-}
-
 startBtn.addEventListener('click', () => {
-    let count = 0;
     const interval = setInterval(() => {
         songNameDiv.textContent = getRandomSong();
-        count++;
-        if (count > 15) { // 高速切替後に停止（約4.5秒）
-            clearInterval(interval);
-            const finalSong = getRandomSong();
-            songNameDiv.textContent = finalSong;
-            audioPlayer.play();
-        }
-    }, 50); // 0.3秒ごとに切替
+    }, 200); // 切り替えスピード（200msごとに更新）
+
+    // 4.4秒後に止める
+    setTimeout(() => {
+        clearInterval(interval);
+        const finalSong = getRandomSong();
+        songNameDiv.textContent = finalSong;
+        audioPlayer.play();
+    }, 4400); // 4.4秒 = 4400ms
 });
-</script>
 
 </body>
 </html>
